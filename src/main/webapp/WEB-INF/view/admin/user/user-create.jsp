@@ -13,6 +13,7 @@
                 <title>Create User</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -56,11 +57,11 @@
                                                         <form:input type="text" class="form-control" path="fullName" />
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="row mb-3">
                                                     <label class="form-label">Address: </label>
                                                     <form:input type="text" class="form-control" path="address" />
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mb-3">
                                                     <div class="col-6">
                                                         <label class="form-label">Role: </label>
                                                         <select class="form-select">
@@ -75,12 +76,9 @@
                                                             accept=".png, .jpg, .jpeg">
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-6"></div>
-                                                    <div class="col-6">
-                                                        <img style="max-height: 250px; display: none;" src=""
-                                                            alt="avatar preview" id="avatarPreview">
-                                                    </div>
+                                                <div class="">
+                                                    <img style="max-height: 200px; display: none; border-radius: 12px;"
+                                                        src="" alt="avatar preview" id="avatarPreview">
                                                 </div>
                                                 <div class="row mt-5">
                                                     <div class="col d-grid col-md-6 mx-auto">
@@ -99,6 +97,16 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
                 <script src="/js/scripts.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </body>
 
             </html>
