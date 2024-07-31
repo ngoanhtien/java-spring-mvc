@@ -28,34 +28,61 @@
                                     <li class="breadcrumb-item active"><a href="/admin/user">Table User</a></li>
                                     <li class="breadcrumb-item active">Users</li>
                                 </ol>
-                                <div class="container-md mt-5">
+                                <div class="container-lg mt-5">
                                     <div class="row">
-                                        <div class="col-md-6 col-12 mx-auto ">
+                                        <div class="col-md-8 col-12 mx-auto ">
                                             <h3 class="text-center">Create a user</h3>
                                             <hr>
                                             <form:form method="post" action="/admin/user/create"
                                                 modelAttribute="newUser">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email address: </label>
-                                                    <form:input type="email" class="form-control" path="email" />
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
+                                                        <label class="form-label">Email address: </label>
+                                                        <form:input type="email" class="form-control" path="email" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label">Password: </label>
+                                                        <form:input type="password" class="form-control"
+                                                            path="password" />
+                                                    </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Password: </label>
-                                                    <form:input type="password" class="form-control" path="password" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Full name: </label>
-                                                    <form:input type="text" class="form-control" path="fullName" />
+                                                <div class="row mb-3">
+                                                    <div class="col-6">
+                                                        <label class="form-label">Phone number: </label>
+                                                        <form:input type="text" class="form-control" path="phone" />
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-label">Full name: </label>
+                                                        <form:input type="text" class="form-control" path="fullName" />
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Address: </label>
                                                     <form:input type="text" class="form-control" path="address" />
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Phone number: </label>
-                                                    <form:input type="text" class="form-control" path="phone" />
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label class="form-label">Role: </label>
+                                                        <select class="form-select">
+                                                            <option>Role</option>
+                                                            <option value="1">Admin</option>
+                                                            <option value="2" selected>User</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="avatarFile" class="form-label">Avatar: </label>
+                                                        <input class="form-control" type="file" id="avatarFile"
+                                                            accept=".png, .jpg, .jpeg">
+                                                    </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="col-6"></div>
+                                                    <div class="col-6">
+                                                        <img style="max-height: 250px; display: none;" src=""
+                                                            alt="avatar preview" id="avatarPreview">
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
                                                     <div class="col d-grid col-md-6 mx-auto">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
