@@ -58,8 +58,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
-                                                    <label class="form-label">Address: </label>
-                                                    <form:input type="text" class="form-control" path="address" />
+                                                    <div class="col-12">
+                                                        <label class="form-label">Address: </label>
+                                                        <form:input type="text" class="form-control" path="address" />
+                                                    </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-6">
