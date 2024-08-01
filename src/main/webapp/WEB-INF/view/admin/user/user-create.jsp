@@ -35,7 +35,7 @@
                                             <h3 class="text-center">Create a user</h3>
                                             <hr>
                                             <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" enctype="multipart/form-data">
                                                 <div class="row mb-3">
                                                     <div class="col-6">
                                                         <label class="form-label">Email address: </label>
@@ -66,16 +66,15 @@
                                                 <div class="row mb-3">
                                                     <div class="col-6">
                                                         <label class="form-label">Role: </label>
-                                                        <select class="form-select">
-                                                            <option>Role</option>
-                                                            <option value="1">Admin</option>
-                                                            <option value="2" selected>User</option>
-                                                        </select>
+                                                        <form:select class="form-select" path="role.name">
+                                                            <form:option value="Admin">Admin</form:option>
+                                                            <form:option value="User">User</form:option>
+                                                        </form:select>
                                                     </div>
                                                     <div class="col-6">
                                                         <label for="avatarFile" class="form-label">Avatar: </label>
                                                         <input class="form-control" type="file" id="avatarFile"
-                                                            accept=".png, .jpg, .jpeg">
+                                                            name="file" accept=".png, .jpg, .jpeg" />
                                                     </div>
                                                 </div>
                                                 <div class="">
