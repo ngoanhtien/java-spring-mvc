@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller.admin;
+package vn.ngotien.laptopshop.controller.admin;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.service.UploadService;
-import vn.hoidanit.laptopshop.service.UserService;
+import vn.ngotien.laptopshop.domain.User;
+import vn.ngotien.laptopshop.service.UploadService;
+import vn.ngotien.laptopshop.service.UserService;
 
 @Controller
 public class UserController {

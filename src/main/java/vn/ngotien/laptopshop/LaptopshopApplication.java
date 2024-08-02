@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop;
+package vn.ngotien.laptopshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
