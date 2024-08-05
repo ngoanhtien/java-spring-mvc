@@ -32,7 +32,10 @@
                                 <div class="container-lg mt-5">
                                     <div class="row">
                                         <div class="col-md-8 col-12 mx-auto ">
-                                            <h3 class="text-center">Create a user</h3>
+                                            <div class="d-flex justify-content-between">
+                                                <h3 class="">Create a user</h3>
+                                                <a href="/admin/user" class="btn btn-success" role="button">Back</a>
+                                            </div>
                                             <hr>
                                             <form:form method="post" action="/admin/user/create"
                                                 modelAttribute="newUser" enctype="multipart/form-data">

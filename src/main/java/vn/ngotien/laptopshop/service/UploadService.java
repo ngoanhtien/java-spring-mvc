@@ -41,4 +41,11 @@ public class UploadService {
         }
         return finalName;
     }
+
+    public String hanldeUpdateFile(String fileName) {
+        String rootPath = this.servletContext.getRealPath("/resources/images");
+        File dir = new File(rootPath + File.separator + "avatar" + File.separator + fileName);
+        String finalName = dir.getPath();
+        return finalName;
+    }
 }

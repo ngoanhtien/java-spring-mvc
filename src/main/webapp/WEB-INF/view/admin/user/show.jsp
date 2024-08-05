@@ -38,6 +38,7 @@
                                             <th>ID</th>
                                             <th>Email</th>
                                             <th>Full name</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,9 @@
                                                 </td>
                                                 <td>
                                                     <c:out value="${user.fullName}"></c:out>
+                                                </td>
+                                                <td>
+                                                    <c:out value="${user.role.name}"></c:out>
                                                 </td>
                                                 <td>
                                                     <a href="/admin/user/${user.id}"

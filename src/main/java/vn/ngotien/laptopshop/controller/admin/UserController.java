@@ -2,6 +2,7 @@ package vn.ngotien.laptopshop.controller.admin;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +23,12 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -62,7 +65,11 @@ public class UserController {
             @ModelAttribute("newUser") User user,
             @RequestParam("file") MultipartFile file) {
         String avatarPath = this.uploadService.handleUploadFile(file, "avatar");
-        // this.userService.userHandleSave(user);
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setAvatar(avatarPath);
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+        this.userService.userHandleSave(user);
         return "redirect:/admin/user";
     }
 
@@ -77,26 +84,27 @@ public class UserController {
     @RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.GET)
     public String getUserUpdatePage(Model model, @PathVariable("id") long id) {
         User user = this.userService.getUserById(id);
+        String fileName = user.getAvatar();
+        String finalName = this.uploadService.hanldeUpdateFile(fileName);
         model.addAttribute("newUser", user);
+        model.addAttribute("finalName", finalName);
+        System.out.println(finalName);
+        // model.addAttribute("fileName", finalName);
         return "admin/user/user-update";
     }
 
-    // @RequestMapping(value = "/admin/user/update/{id}", method =
-    // RequestMethod.POST)
-    // public String postUpdateUser(Model model, @PathVariable("id") long id,
-    // @ModelAttribute("newUser") User user) {
-    // this.userService.getUserById(id);
-    // this.userService.userHandleSave(user);
-    // return "redirect:/admin/user";
-    // }
-
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User user) {
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User user,
+            @RequestParam("file") MultipartFile file) {
         User currentUser = this.userService.getUserById(user.getId());
+        String avatar = this.uploadService.handleUploadFile(file, "avatar");
         if (currentUser != null) {
-            currentUser.setAddress(user.getAddress());
             currentUser.setFullName(user.getFullName());
             currentUser.setPhone(user.getPhone());
+            currentUser.setAddress(user.getAddress());
+            currentUser.setAvatar(avatar);
+            currentUser.setRole(this.userService.getRoleByName(user.getRole().getName()));
+
             this.userService.userHandleSave(currentUser);
         }
         return "redirect:/admin/user";
