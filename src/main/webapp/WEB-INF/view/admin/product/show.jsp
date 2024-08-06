@@ -23,9 +23,53 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Product</h1>
                             <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Product</li>
                             </ol>
-
+                            <div class="mt-5">
+                                <div class="d-flex justify-content-between">
+                                    <h3>Table products</h3>
+                                    <a class="btn btn-primary" href="/admin/product/create">Create a product</a>
+                                </div>
+                                <hr>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Factory</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="product" items="${products}">
+                                            <tr>
+                                                <td>
+                                                    <c:out value="${product.id}"></c:out>
+                                                </td>
+                                                <td>
+                                                    <c:out value="${product.email}"></c:out>
+                                                </td>
+                                                <td>
+                                                    <c:out value="${product.fullName}"></c:out>
+                                                </td>
+                                                <td>
+                                                    <c:out value="${product.role.name}"></c:out>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/product/${product.id}"
+                                                        class="btn btn-sm btn-success">View</a>
+                                                    <a href="/admin/product/update/${product.id}"
+                                                        class="btn btn-sm btn-warning mx-3">Update</a>
+                                                    <a href="/admin/product/delete/${product.id}"
+                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </main>
                     <jsp:include page="../layout/footer.jsp" />
