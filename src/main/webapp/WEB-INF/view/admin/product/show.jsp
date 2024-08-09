@@ -49,13 +49,13 @@
                                                     <c:out value="${product.id}"></c:out>
                                                 </td>
                                                 <td>
-                                                    <c:out value="${product.email}"></c:out>
+                                                    <c:out value="${product.name}"></c:out>
                                                 </td>
                                                 <td>
-                                                    <c:out value="${product.fullName}"></c:out>
+                                                    <c:out value="${product.price}"></c:out>
                                                 </td>
                                                 <td>
-                                                    <c:out value="${product.role.name}"></c:out>
+                                                    <c:out value="${product.factory}"></c:out>
                                                 </td>
                                                 <td>
                                                     <a href="/admin/product/${product.id}"
