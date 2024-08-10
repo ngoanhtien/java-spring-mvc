@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +32,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
@@ -71,7 +69,7 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @RequestMapping("/admin/user/{id}")
+    @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable("id") long id) {
         // model.getAttribute("id");
         User user = this.userService.getUserById(id);
@@ -79,15 +77,10 @@ public class UserController {
         return "admin/user/user-detail";
     }
 
-    @RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.GET)
+    @GetMapping("/admin/user/update/{id}")
     public String getUserUpdatePage(Model model, @PathVariable("id") long id) {
         User user = this.userService.getUserById(id);
-        String fileName = user.getAvatar();
-        String finalName = this.uploadService.hanldeUpdateFile(fileName);
         model.addAttribute("newUser", user);
-        model.addAttribute("finalName", finalName);
-        System.out.println(finalName);
-        // model.addAttribute("fileName", finalName);
         return "admin/user/user-update";
     }
 

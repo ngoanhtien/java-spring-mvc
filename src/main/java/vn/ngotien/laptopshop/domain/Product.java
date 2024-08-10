@@ -30,8 +30,8 @@ public class Product {
     private String image;
 
     @NotNull
-    @NotEmpty(message = "Mô tả sản phẩm không được để trống")
-    @Column(columnDefinition = "MediumText")
+    @NotEmpty(message = "detailDesc không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotEmpty(message = "Mô tả ngắn sản phẩm không được để trống")

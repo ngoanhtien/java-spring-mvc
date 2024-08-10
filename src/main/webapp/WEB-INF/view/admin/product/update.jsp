@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Ngô Tiến - Dự án laptopshop" />
                 <meta name="author" content="Ngô Tiến IT" />
-                <title>Create Product</title>
+                <title>Update product</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -23,21 +23,21 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Create Product</h1>
+                                <h1 class="mt-4">Update product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active"><a href="/admin/product">Table Product</a></li>
-                                    <li class="breadcrumb-item active">Products</li>
+                                    <li class="breadcrumb-item active">Update product</li>
                                 </ol>
-                                <div class="container-lg mt-5">
+                                <div class="mt-5">
                                     <div class="row">
-                                        <div class="col-md-8 col-12 mx-auto ">
+                                        <div class="col-md-8 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3 class="">Create a product</h3>
+                                                <h3 class="">Update product</h3>
                                                 <a href="/admin/product" class="btn btn-success" role="button">Back</a>
                                             </div>
                                             <hr>
-                                            <form:form method="post" action="/admin/product/create"
+                                            <form:form method="post" action="/admin/product/update"
                                                 modelAttribute="newProduct" enctype="multipart/form-data">
                                                 <c:set var="errorName">
                                                     <form:errors path="name" cssClass="invalid-feedback" />
@@ -55,6 +55,10 @@
                                                     <form:errors path="quantity" cssClass="invalid-feedback" />
                                                 </c:set>
 
+                                                <div class="mb-3" style="display: none;">
+                                                    <label class="form-label">Id: </label>
+                                                    <form:input type="text" class="form-control" path="id" />
+                                                </div>
                                                 <div class="row mb-3">
                                                     <div class="col-6">
                                                         <label class="form-label">Name:
@@ -152,6 +156,13 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgImage = "${newProduct.image}";
+                        if (orgImage) {
+                            const urlImage = "/images/product/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);

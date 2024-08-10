@@ -28,7 +28,7 @@ public class UploadService {
             byte[] bytes;
             bytes = file.getBytes();
 
-            File dir = new File(rootPath + File.separator + "avatar");
+            File dir = new File(rootPath + File.separator + targetFolder);
             if (!dir.exists())
                 dir.mkdirs();
 
@@ -42,13 +42,6 @@ public class UploadService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return finalName;
-    }
-
-    public String hanldeUpdateFile(String fileName) {
-        String rootPath = this.servletContext.getRealPath("/resources/images");
-        File dir = new File(rootPath + File.separator + "avatar" + File.separator + fileName);
-        String finalName = dir.getPath();
         return finalName;
     }
 }
