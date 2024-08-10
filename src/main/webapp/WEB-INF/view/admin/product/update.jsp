@@ -79,7 +79,7 @@
                                                 <div class="row mb-3">
                                                     <div class="col">
                                                         <label class="form-label">Detail description: </label>
-                                                        <form:input type="text"
+                                                        <form:textarea type="text"
                                                             class="form-control ${not empty nameHasBindError ? 'is-invalid' : ''}"
                                                             path="detailDesc" />
                                                         ${errorDetailDesc}

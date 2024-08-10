@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
 import vn.ngotien.laptopshop.domain.Product;
-import vn.ngotien.laptopshop.domain.User;
 import vn.ngotien.laptopshop.service.ProductService;
 import vn.ngotien.laptopshop.service.UploadService;
 
@@ -119,5 +118,4 @@ public class ProductController {
         this.productService.deleteById(product.getId());
         return "redirect:/admin/product";
     }
-
 }
