@@ -87,8 +87,8 @@
                                                     <div class="col-6">
                                                         <label class="form-label">Role: </label>
                                                         <form:select class="form-select" path="role.name">
-                                                            <form:option value="Admin">Admin</form:option>
-                                                            <form:option value="User">User</form:option>
+                                                            <form:option value="ADMIN">Admin</form:option>
+                                                            <form:option value="USER">User</form:option>
                                                         </form:select>
                                                     </div>
                                                     <div class="col-6">

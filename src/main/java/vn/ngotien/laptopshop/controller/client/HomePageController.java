@@ -55,7 +55,7 @@ public class HomePageController {
         }
         User user = this.userService.RegisterDTOtoUser(registerDTO);
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        user.setRole(this.userService.getRoleByName("User"));
+        user.setRole(this.userService.getRoleByName("USER"));
         this.userService.userHandleSave(user);
         return "redirect:/login";
     }

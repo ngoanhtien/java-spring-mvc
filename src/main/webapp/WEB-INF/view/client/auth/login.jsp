@@ -27,14 +27,18 @@
                                                 <h3 class="text-center font-weight-light my-4">Login</h3>
                                             </div>
                                             <div class="card-body">
-                                                <form:form>
+                                                <form:form method="post" action="/login">
+                                                    <c:if test="${param.error != null}">
+                                                        <div class="my-2" style="color: red;">Invalid email or password.
+                                                        </div>
+                                                    </c:if>
                                                     <div class="form-floating mb-3">
-                                                        <input class="form-control" type="email"
+                                                        <input class="form-control" type="email" name="username"
                                                             placeholder="name@example.com" />
                                                         <label>Email address</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
-                                                        <input class="form-control" type="password"
+                                                        <input class="form-control" type="password" name="password"
                                                             placeholder="Password" />
                                                         <label>Password</label>
                                                     </div>
@@ -45,6 +49,10 @@
                                                                 Login
                                                             </button>
                                                         </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
                                                     </div>
                                                 </form:form>
                                             </div>
