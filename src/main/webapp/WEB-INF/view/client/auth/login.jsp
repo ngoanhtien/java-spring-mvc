@@ -29,7 +29,22 @@
                                             <div class="card-body">
                                                 <form:form method="post" action="/login">
                                                     <c:if test="${param.error != null}">
-                                                        <div class="my-2" style="color: red;">Invalid email or password.
+                                                        <div class="align-items-center text-bg-danger border-0 my-2 py-2 rounded-2"
+                                                            role="alert" aria-live="assertive" aria-atomic="true">
+                                                            <div class="d-flex">
+                                                                <div class="ms-3 text-bold">Invalid email or password!
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
+
+                                                    <c:if test="${param.logout != null}">
+                                                        <div class="align-items-center text-bg-success border-0 my-2 py-2 rounded-2"
+                                                            role="alert" aria-live="assertive" aria-atomic="true">
+                                                            <div class="d-flex">
+                                                                <div class="ms-3 text-bold">Logout success!
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </c:if>
                                                     <div class="form-floating mb-3">
