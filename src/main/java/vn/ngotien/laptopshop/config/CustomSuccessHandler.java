@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -16,9 +17,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.ngotien.laptopshop.domain.User;
+import vn.ngotien.laptopshop.service.UserService;
 
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
+    @Autowired
+    private UserService userService;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     protected String determineTargetUrl(final Authentication authentication) {
@@ -51,19 +56,27 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
+    protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
+        // get email
+        String email = authentication.getName();
+        // Retrieve user by email
+        User user = this.userService.getUserByEmail(email);
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        if (user != null) {
+            session.setAttribute("fullName", user.getFullName());
+            session.setAttribute("avatar", user.getAvatar());
+        }
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         handle(request, response, authentication);
-        clearAuthenticationAttributes(request);
+        clearAuthenticationAttributes(request, authentication);
     }
 
 }
