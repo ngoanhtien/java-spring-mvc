@@ -100,17 +100,24 @@
                                                                         href="/product/detail/${product.id}">${product.name}</a>
                                                                 </h4>
                                                                 <p style="font-size: 14px;">${product.shortDesc}</p>
-                                                                <div class="d-flex flex-lg-wrap">
+                                                                <div class="d-flex flex-lg-wrap justify-content-center">
                                                                     <p class="fs-5 fw-bold mb-2 text-warning"
                                                                         style="font-size: 16px; width: 100%;">
                                                                         <fmt:formatNumber type="number"
                                                                             value="${product.price}" /> đ
                                                                     </p>
-                                                                    <a href="#"
-                                                                        class="mx-auto border border-secondary rounded-pill px-4 py-1 text-primary"><i
-                                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                        Add to
-                                                                        cart</a>
+                                                                    <form action="/add-product-to-cart/${product.id}"
+                                                                        method="post">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" />
+                                                                        <button
+                                                                            class="mx-auto border border-secondary rounded-pill px-4 py-1 text-primary bg-white"><i
+                                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                            Add to
+                                                                            cart
+                                                                        </button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
