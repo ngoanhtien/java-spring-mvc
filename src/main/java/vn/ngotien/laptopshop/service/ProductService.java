@@ -46,7 +46,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void handleAddProductToCart(String email, long productId) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
 
         // check user đã có cart chưa ? nếu chưa -> tạo mới
@@ -61,17 +61,30 @@ public class ProductService {
                 cart = this.cartRepository.save(otherCart);
             }
 
-            cart.setSum(cart.getSum() + 1);
-
-            // lưu cart_detail
-            CartDetail cartDetail = new CartDetail();
+            // Lấy product
             Product product = this.productRepository.findById(productId);
-            cartDetail.setPrice(product.getPrice());
-            cartDetail.setQuantity(1);
-            cartDetail.setCart(cart);
-            cartDetail.setProduct(product);
 
-            this.cartDetailRepository.save(cartDetail);
+            // check product đã tồn tại trong giỏ hàng chưa
+            CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, product);
+
+            if (oldDetail == null) {
+                // Tạo mới cart_detail
+                CartDetail cartDetail = new CartDetail();
+                cartDetail.setPrice(product.getPrice());
+                cartDetail.setQuantity(1);
+                cartDetail.setCart(cart);
+                cartDetail.setProduct(product);
+                this.cartDetailRepository.save(cartDetail);
+
+                // update sum in cart
+                int sum = cart.getSum() + 1;
+                cart.setSum(sum);
+                this.cartRepository.save(cart);
+                session.setAttribute("sum", sum);
+            } else {
+                oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                this.cartDetailRepository.save(oldDetail);
+            }
         }
     }
 }
