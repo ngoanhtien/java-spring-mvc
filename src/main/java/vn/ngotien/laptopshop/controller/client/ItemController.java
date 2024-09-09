@@ -1,5 +1,6 @@
 package vn.ngotien.laptopshop.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import vn.ngotien.laptopshop.domain.Cart;
+import vn.ngotien.laptopshop.domain.CartDetail;
 import vn.ngotien.laptopshop.domain.Product;
+import vn.ngotien.laptopshop.domain.User;
 import vn.ngotien.laptopshop.service.ProductService;
 
 @Controller
@@ -41,8 +45,23 @@ public class ItemController {
     }
 
     @GetMapping("/cart")
-    public String getCartPage(Model model) {
+    public String getCartPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        User user = new User();
+        long id = (long) session.getAttribute("id");
+        user.setId(id);
 
+        Cart cart = this.productService.fetchByUser(user);
+
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
+
+        double totalPrice = 0;
+        for (CartDetail cartDetail : cartDetails) {
+            totalPrice += cartDetail.getPrice() * cartDetail.getQuantity();
+        }
+
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
         return "client/cart/show";
     }
 }
